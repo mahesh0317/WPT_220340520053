@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=in, initial-scale=1.0">
+    <title>Document</title>
+    <script src="jquery-3.5.1min.jsc:\Users\user\AppData\Local\Programs\Microsoft VS Code\resources\app\out\vs\code\electron-browser\workbench\workbench.html"></script>
+    <script>
+         $(document).ready =>{
+           console.log(Page loaded);
+           $('#bookid').blur(() =>{
+            console.log("Blur event occurred");
+            let input = {bookid: $('#bookid').val()}
+            let parameterstothefunction ={
+                data: input,
+                url: 'http://localhost:550/getareaname',
+                type:'get',
+                detatype: 'json',
+                success: function ( detafromservr){
+                    console.log("Deta fetched successfully");
+                    console.log(datafromservr);
+                    if(datafromservr.status ===true){
+                        $('#book').val(datafromservr.detail.boookname);
+                        $('#msg').text("book name is found");
+                }
+                else{
+                    $('#book').val(datafromservr.detail.boookname);
+                        $('#msg').text("book name is  not found");
+                }
+                error: function(errorfromservr){
+                    console.log("some error occurred"+errorfromservr);
+                }
+            }
+            $.ajax(parameterstothefunction);
+
+           });
+           $('#update').click(() =>{
+            console.log("add buttone clicked");
+
+            let input={ bookid; $(#bookid').val(), bookname: $(#name).val()}
+            let parameterstothefunction ={
+                data: input,
+                url: 'http://localhost:550/getareaname',
+                type:'get',
+                detatype: 'json',
+                success: function ( detafromservr){
+                    console.log("Deta fetched successfully");
+                    console.log(datafromservr);
+                    if(datafromservr.status ===true){
+                        $('#book').val(datafromservr.detail.boookname);
+                        $('#msg').text("book name is found");
+                }
+                else{
+                    $('#book').val(datafromservr.detail.boookname);
+                        $('#msg').text("book name is  not found");
+                }
+                error: function(errorfromservr){
+                    console.log("some error occurred"+errorfromservr);
+                }
+            }
+            $.ajax(parameterstothefunction);
+
+           });
+
+           });
+
+        
+
+
+
+    </script>
+</head>
+<body>
+    <input type="number" id="number" name="number" placeholder="Enter The Bookid"><br>
+    <input type="text"   id="book"   name="book"  placeholder="Book Name"><br>
+    <input type="number" id="price" name="price" placeholder="price of book"><br>
+    <input type="button" name="Add Book" id="Add Book" value="Add Book">
+</body>
+</html>
